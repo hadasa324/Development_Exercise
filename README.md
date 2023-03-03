@@ -1,5 +1,5 @@
 # Command and Control Application
-## This aplication include the following files:
+## The application include the following files:
 ### Server files:
 > 1. server.py
 > 2. command_dir dirctory
