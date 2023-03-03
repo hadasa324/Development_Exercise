@@ -1,19 +1,13 @@
 # Command and Control Application
-## The application include the following files:
-### Server files:
-> 1. server.py
-> 2. command_dir dirctory
->    - dowmload_from_url.py
->    - file_upload.py
->    - port_scan.py
->    - screenshot.py
->    - shell_exec.py
-### Client files:
-> 1. client.py
-> 2. config_client_file.py
-### Packages 
-> requirements.txt
-## Summary of the application structure
+### Something from me:
+It is important for me to note that I did this **without any background in the subject** - I learned everything by myself almost from scratch
+and I enjoyed every moment of learning!!  
+The app is far from perfect and I know that, but there was an effect of time and also learn how all the things work and how to implement ...    
+Apart from the basic implementation (which is not perfect), such a server is something that has no end and I feel like I can add endless things to it...  
+I am ready to improve it if you want... :muscle::nerd_face:  
+Thank you Hadasa.
+
+## Summary of the application structure:
 ### Server side:
 1. The server always listens to clients that want to connect and accepts them.
 2. At the same time, the server manages a refresh CLI that:
@@ -33,6 +27,7 @@
       - The payload of the command -> which it creates from the payloads that exist in "commands_dir"
       - arguments -> are taken as input from the server operator
       - command_id and command_type of the command
+> Note The port_scan and screenshot payloads do not work - I left them to show thinking...
 ### Client side:
 1. The client takes data from the predefined configuration file - "coinfig_client_file.py"
 2. Trying to connect to the server
@@ -50,15 +45,20 @@
         - command_status -> if successful returns Finished otherwise Error
         - command_id and command_type of the executed command
 
-## Something from me:
-It is important for me to note that I did this **without any background in the subject** - I learned everything by myself almost from scratch
-And I enjoyed every moment of learning!!
-The app is far from perfect and I know that, but there was an effect of time and also learn how all the things work and how to implement ...
-Apart from the basic implementation (which is not perfect), such a server is something that has no end and I feel like I can add endless things to it...
-I am ready to improve it if you want...
-Thank you Hadasa.
-> Note The port_scan and screenshot payloads do not work - I left them to show thinking...
-
+## The application include the following files:
+### Server files:
+> 1. server.py
+> 2. command_dir dirctory
+>    - dowmload_from_url.py
+>    - file_upload.py
+>    - port_scan.py
+>    - screenshot.py
+>    - shell_exec.py
+### Client files:
+> 1. client.py
+> 2. config_client_file.py
+### Packages 
+> requirements.txt
 
 ## To test this C2 Appliacation:
  Clone the repository:
