@@ -4,7 +4,6 @@ import os
 import threading
 from queue import Queue
 import time
-import help_func
 from config_client_file import BaseConfig
 from termcolor import colored
 
@@ -89,13 +88,13 @@ class Client():
     # Listening for incoming messages from server
     def listen_for_messages(self):
         while self.running:
-            message = help_func._recv(self.client_socket)
+            message = self._recv(self.client_socket)
             if message:
                 if message["command_type"] == "exit":
                     self.running = False
                     result_message = {"command_result" : "exit"}
                     data = json.dumps(result_message)
-                    help_func._send(self.client_socket,data)
+                    self._send(self.client_socket,data)
                     break
                 else:
                  self.handle_message(message)
@@ -128,9 +127,30 @@ class Client():
                     #self.client_socket.sendall(json.dumps(result_message).encode("utf-8"))
                     data = json.dumps(result_message)
                     # self.client_socket.sendall(data.encode("utf-8"))
-                    help_func._send(self.client_socket,data)
+                    self._send(self.client_socket,data)
             except Exception as e:
                 return(colored(f"Thw command was nor excuted: {e}","red"))
+        
+    #Send data to the server    
+    def _send(self ,socket, data):
+        try:
+            serialized = json.dumps((data))
+        except (TypeError, ValueError):
+            raise Exception('You can only send JSON-serializable data')
+        socket.sendall(serialized.encode('utf-8'))
+
+    #Recive data from the server
+    def _recv(self ,socket):
+                data = socket.recv(4000).decode("utf-8")
+                try:
+                    deserialized = json.loads(data)
+                except (TypeError, ValueError):
+                    raise Exception('Data received was not in JSON format')
+                return deserialized
+
+
+
+
                 
 
 

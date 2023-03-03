@@ -3,7 +3,6 @@ import threading
 import time
 import json
 import os
-import help_func
 from termcolor import colored
 #for dispaly the refreshing status in sparate cli 
 import subprocess
@@ -24,13 +23,21 @@ class ClientThread(threading.Thread):
         self.command_results = {}
         self.data_received = threading.Event()  # Create a threading.Event() for self.command_thread to wait until the data is recived
         
+    # Recive data from the actual client
+    def _recv(self ,socket):
+                data = socket.recv(4000).decode("utf-8")
+                try:
+                    deserialized = json.loads(data)
+                except (TypeError, ValueError):
+                    raise Exception('Data received was not in JSON format')
+                return deserialized
 
     def run(self):
         print(colored("New client connected at time: {} with ID {}".format(self.last_alive_time ,self.id),"green"))
         #add a new client thread to the list of active client threads being handled by the server.
         self.server.add_client_thread(self)
         while self.server.running:
-                data = help_func._recv(self.conn)
+                data = self._recv(self.conn)
                 if not data:
                     return
                 message = json.loads(data)
@@ -224,7 +231,6 @@ class Server:
                         self.display_cmd_result_single(int(client_id))
         # indicate that the command function has stopped
         finally: self.command_running_event.clear()  
-
 
  
 #Add or updates if already existing results, 
