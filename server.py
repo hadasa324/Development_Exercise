@@ -159,9 +159,10 @@ class Server:
     def stop(self):
         self.running = False
         with self.client_threads_lock:
-            for client_id in dict(self.client_threads):
+            clients =dict(self.client_threads)
+        for client_id in clients:
                 self.kill_client(self.client_threads[client_id])
-            self.client_threads = {}
+        self.client_threads = {}
         if self.server_socket is not None:
             self.server_socket.close()
             self.server_socket = None

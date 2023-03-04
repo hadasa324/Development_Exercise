@@ -35,7 +35,7 @@ class Client():
     def connect(self):
         self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.client_socket.connect((self.server_host, self.server_port))
-        print("connected")
+        # print("connected")
         # threading.Thread(target=self.send_keep_alive).start()
         self.listen_for_messages()
     
@@ -70,7 +70,6 @@ class Client():
         try:
             if result:
                 result_message = {'type': 'result', 'command_id': command_id,'command_type': command_type , 'command_result': result,'command_status':status }
-                # data =json.dumps(result_message)
         except Exception as e:
              return(colored(f"The command could not be executed: {e}","red"))
 
