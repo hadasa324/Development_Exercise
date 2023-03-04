@@ -19,7 +19,7 @@ Thank you Hadasa.
     - The menu operations are:
       -  send a command
       -  kill clients
-      -  display results of actions 
+      -  display results of operation 
       -  exit the server -> close it
     - Each action can be sent to a selected client or broadcast to all clients
     - When sending a command:
